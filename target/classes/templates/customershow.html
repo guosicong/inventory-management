@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/> 
+
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+
+    <h2>Customer Details</h2>
+    <div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Weixin Id:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.weixinId}">weixinId</p></div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Company:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.company}">company</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Phone:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.phone}">Phone</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Customer Name:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.custName}">custName</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Sex:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.sex}">sex</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Hobby:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.hobby}">hobby</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Address:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.address}">address</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Brith Year:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.brithYear}">brithYear</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Brith Day:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.brithDay}">brithDay</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Career:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.career}">career</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Year Income:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.incomeYear}">incomeYear</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Company:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.company}">company</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Postion:</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" th:text="${customer.postion}">postion</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row"> <p><a href="/customers" class="back" th:href="@{/customers}">Back to customers</a></p></div>
+</div>
+
+</body>
+</html>

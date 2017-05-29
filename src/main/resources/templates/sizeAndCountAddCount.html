@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/> 
+
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+    <h2>尺码明细</h2>
+    <div>
+        <form class="form-horizontal" th:action="${'/sizeAndCountAddCount/Add/'+'/'+sizeAndCount.Id}" method="post" onsubmit="return sumbit_sure()">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Shoes Id:</label>
+                <div class="col-sm-10">
+                    <!-- <input type="text" class="form-control" th:field="*{product.ID}"/> -->
+                    <td th:text="${sizeAndCount.product.ID}">productId</td>
+                    <input type="hidden" th:field="${sizeAndCount.product.ID}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">尺码:</label>
+                <div class="col-sm-10">
+                	<td th:text="${sizeAndCount.size}">尺码</td>
+                    <input type="hidden" class="form-control" th:field="${sizeAndCount.size}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">库存:</label>
+                <div class="col-sm-10">
+                	<td th:text="${sizeAndCount.count}">库存</td>
+                    <input type="hidden" class="form-control" th:field="${sizeAndCount.count}"/>
+                </div>
+            </div>
+            
+            <div class="form-group" name="inputAdd">
+                <label class="col-sm-2 control-label">增加值:</label>
+                <div class="col-sm-10">
+                    <input id="addCountId" type="text" name="AddCount" />
+                </div>
+            </div>
+            
+	        <ul class="nav navbar-nav">
+	       		<!-- <li><a class="form-horizontal" type="submit" th:object="${product}" th:action="@{/product}"  method="POST">Submit</a></li> -->
+	       		<button type="button" class="btn btn-default" onclick="postAddCount()">Submit</button>
+	            <button type="button" class="btn btn-default"><a class="form-horizontal" th:href="${'/product/' + sizeAndCount.product.ID}" method="GET">Cancel</a></button>
+	        </ul>
+	        
+        </form>
+    </div>
+</div>
+
+<script th:inline="javascript">  
+	function sumbit_sure(){  
+		var gnl=confirm("确定要提交?");  
+		if (gnl==true){  
+			return true;  
+		}else{  
+		return false;  
+		}  
+	}  
+
+    function postAddCount() {  
+        $.ajax({  
+            type: "POST",  
+            url: "/sizeAndCountAddCount/",  
+            //contentType: "application/json", //必须有  
+            //dataType: "json", //表示返回值类型，不必须  
+            data: { "addCount": document.getElementById('addCountId').value, "Id": [[${sizeAndCount.Id}]]},  //相当于 //data: "{'str1':'foovalue', 'str2':'barvalue'}",  
+            
+            success: function (data) {
+            	window.location.href="/product/"+[[${sizeAndCount.product.ID}]];
+                var result = data;
+                alert(result);
+            },
+            error: function (err) {
+                console.log(err);
+                alert("ERROR:" + err);
+            }
+        });
+    }
+</script>
+    
+</body>
+</html>

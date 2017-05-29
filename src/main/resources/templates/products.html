@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+ 
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+<head lang="en">
+
+    <title>Shoes</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <!--<div th:if="${not #lists.isEmpty(products)}">-->
+    <div>
+        <h2 >Shoes List</h2>
+        <ul class="nav navbar-nav">
+            <li sec:authorize="hasAuthority('ROLE_ADMIN')"><a href="#" class="add" th:href="@{/product/new}">新增鞋子</a></li>
+        </ul>
+        <table class="table table-striped">
+            <tr>
+                <th>产品ID</th>
+                <th>品牌</th>
+                <th>型号</th>
+                <th>成人儿童</th>
+                <th>颜色</th>
+              <!--  <th>所在地</th> -->
+              <!--  <th>持有者</th> -->
+                <th>性别</th>
+                <th>查看明细</th>
+                <th sec:authorize="hasAuthority('ROLE_ADMIN')">编辑产品</th>
+                <th sec:authorize="hasAuthority('ROLE_ADMIN')">删除产品</th>
+            </tr>
+            <tr th:each="product : ${products}" data-toggle="collapse" data-target="#demo">
+                <td th:text="${product.ID}"><a href="${/product/product.ID}">Id</a></td>
+                <td th:text="${product.brand}">Brand</td>
+                <td th:text="${product.xinghao}">Xinghao</td>
+                <td th:text="${product.isKid}">IsKid</td>
+                <td th:text="${product.color}">Color</td>
+          <!--      <td th:text="${product.location}">Location</td>  -->
+          <!--      <td th:text="${product.holder}">Holder</td>  -->
+                <td th:text="${product.sexy}">Sexy</td>  
+                <!-- 
+                <tr>
+            	<div th:each="mapS:${product.sizeAndCounts}">  
+            		<div th:text="${mapS}"></div>  
+            	</div>  
+     			</tr>   -->
+     			
+               	<td><a th:href="${'/product/' + product.ID}">查看</a></td>
+               	<td sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="${'/product/edit/' + product.ID}">编辑</a></td>
+             	<td sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="${'/product/delete/' + product.ID}" onsubmit="return sumbit_sure()" >删除</a> </td>
+            
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script language="javascript">  
+	function sumbit_sure(){  
+		var gnl=confirm("确定要提交?");  
+		if (gnl==true){  
+			return true;  
+		}else{  
+		return false;  
+		}  
+	}  
+</script> 
+
+</body>
+</html>
