@@ -1,12 +1,19 @@
 package inventory.springservice.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import inventory.springservice.domain.AjaxResponseBody;
 
 import inventory.springservice.domain.Product;
 import inventory.springservice.domain.SizeAndCount;
@@ -154,11 +161,27 @@ public class ProductController {
     }
     
     @RequestMapping("getSysUser")
-    public Iterable<SysUser> getSysUsers() {
+    public ResponseEntity<?> getSysUsers() {
     	System.out.println("**************进来了****getSysUsers***********");
+    	AjaxResponseBody result = new AjaxResponseBody();
+    	List<SysUser> users = (List<SysUser>) makeCollection(this.sysUserService.listAllSysUsers());
     	
-    	return this.sysUserService.listAllSysUsers();
+        if (users.isEmpty()) {
+            result.setMsg("no user found!");
+        } else {
+            result.setMsg("success");
+        }
+    	result.setResult(users);
+    	System.out.println("*****************"+result.toString());
+    	return ResponseEntity.ok(result);
     }
-
-
+    
+    //转换Iterable to list
+    public static <E> Collection<E> makeCollection(Iterable<E> iter) {
+        Collection<E> list = new ArrayList<E>();
+        for (E item : iter) {
+            list.add(item);
+        }
+        return list;
+    }
 }
