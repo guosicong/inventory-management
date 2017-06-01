@@ -48,8 +48,8 @@ public class SizeAndCountServiceImp implements SizeAndCountService {
 */	
 	@Override
 	@Transactional
-	public void saveSizeAndCount(Integer id, float size,Integer count) {	
-		sizeAndCountRepository.insertSizeAndCount(id, size, count);
+	public void saveSizeAndCount(Integer id, float size,Integer count, Long sysUserId) {	
+		sizeAndCountRepository.insertSizeAndCount(id, size, count, sysUserId);
 	};	
 
 	@Override

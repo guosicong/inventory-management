@@ -92,7 +92,8 @@ public class ProductController {
     	//System.out.println(sizeAndCount.getProduct().getID());
         sizeAndCountService.saveSizeAndCount(sizeAndCount.getProduct().getID(),
         								     sizeAndCount.getSize(),
-        								     sizeAndCount.getCount());
+        								     sizeAndCount.getCount(),
+        								     sizeAndCount.getSysUser().getId());
     	//System.out.println("**************进来了****2***********");
         return "redirect:/product/" + sizeAndCount.getProduct().getID();
     }
@@ -172,7 +173,7 @@ public class ProductController {
             result.setMsg("success");
         }
     	result.setResult(users);
-    	System.out.println("*****************"+result.toString());
+    	System.out.println("*****************"+result.getResult().toString());
     	return ResponseEntity.ok(result);
     }
     

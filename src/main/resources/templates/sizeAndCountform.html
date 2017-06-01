@@ -20,7 +20,7 @@
 	
 		function getSysUsers() {
 		    $.ajax({
-		        type: "POST",
+		        type: "GET",
 		        contentType: "application/json",
 		        url: "/getSysUser",
 		        data: null,
@@ -30,22 +30,22 @@
 		        success: function(data) {  
 		        	
 		            var jsonObj =data.result;
-		            alert(jsonObj);
+					 
+		            var optionstring = "";
+		            optionstring = '<option value="' + jsonObj[0].id + '">' + jsonObj[0].username + "</option>" +
+		            '<option value="' + jsonObj[1].id + '">' + jsonObj[1].username + "</option>"+
+		            '<option value="' + jsonObj[2].id + '">' + jsonObj[2].username + "</option>"+
+		            '<option value="' + jsonObj[3].id + '">' + jsonObj[3].username + "</option>";  
+		            alert(optionstring);
 
-		            var optionstring = "";  
-		            for (var j = 0; j < jsonObj.length; j++) {  
-		                optionstring += "<option value=\"" + jsonObj[j].id + "\" >" + jsonObj[j].username + "</option>";  
-		            }
-		           
-		            var json = "<h4>Ajax Response</h4><select>" + optionstring + "</select>";
+		            var json = "<select>" + optionstring + "</select>";
 		            $('#feedback').html(json);
-		            //console.log("SUCCESS : ", data);
-		            //$("#btn-search").prop("disabled", false);
+		            
 		        }
 		    });
 		}
 	
-	</script> 
+</script> 
         
 </head>
 <body>
@@ -78,12 +78,9 @@
             
             <div class="form-group">
                 <label class="col-sm-2 control-label">所有者:</label>
-                
-            
                 <div class="col-sm-10" id="feedback"> </div>
-
             	<!--<input id="Button1" type="button" value="获取数据" onclick="getSysUsers()"/> --> 
-       			<button type="button" class="btn btn-default" onclick="getSysUsers()">获取数据</button>
+       			<button type="button" class="btn btn-default" onclick="getSysUsers()" th:field="${sizeAndCount.sysUser.sysUser_id}">获取数据</button>
                 
             </div>
             

@@ -9,9 +9,9 @@ import inventory.springservice.domain.SizeAndCount;
 public interface SizeAndCountRepository extends CrudRepository<SizeAndCount, Integer>{
 	
 	@Modifying
-    @Query(value = "INSERT INTO size_and_count (product_id, size,count) " +
-            "VALUES (?1, ?2, ?3)", nativeQuery=true)
-	public void insertSizeAndCount(Integer id, float size,Integer count);
+    @Query(value = "INSERT INTO size_and_count (product_id, size,count, sys_user_id) " +
+            "VALUES (?1, ?2, ?3, ?4)", nativeQuery=true)
+	public void insertSizeAndCount(Integer id, float size,Integer count, Long sysUserId);
 	
 	@Modifying
 	@Query(value = "UPDATE size_and_count set count = ?1 where Id = ?2", nativeQuery=true)
