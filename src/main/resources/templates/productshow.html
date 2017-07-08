@@ -18,7 +18,7 @@
 
     <div>
         <ul class="nav navbar-nav">
-            <li sec:authorize="hasAuthority('ROLE_ADMIN')"><a href="#" class="add" th:href="${'/product/sizeAndCount/new/'+ product.ID}">新增尺码</a></li>
+            <li th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a href="#" class="add" th:href="${'/product/sizeAndCount/new/'+ product.ID}">新增尺码</a></li>
         </ul>
         
         <table class="table table-striped">
@@ -26,9 +26,9 @@
                 <th>尺码</th>
                 <th>数量</th>
                 <th>持有人</th>
-                <th sec:authorize="hasAuthority('ROLE_ADMIN')">增加</th>
-                <th sec:authorize="hasAuthority('ROLE_ADMIN')">减少</th>
-                <th sec:authorize="hasAuthority('ROLE_ADMIN')">删除</th>
+                <th th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}">增加</th>
+                <th th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}">减少</th>
+                <th th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}">删除</th>
         	</tr> 
 	        <tr th:each="sizeAndCount : ${product.sizeAndCounts}">
 	        	
@@ -38,9 +38,9 @@
 	            
 	            <!--  <button type="submit" class="btn btn-default" >增加</button> -->	
         		<!--  <input id="addCount" type="button" value="增加" onclick="postSimpleData()"/>-->
-        		<td sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="${'/sizeAndCountAddCount/' + sizeAndCount.Id }">增加</a></td>
-	            <td sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="${'/sizeAndCountCutCount/' + sizeAndCount.Id }">减少</a></td>
-                <td sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="${'/sizeAndCount/delete/' + sizeAndCount.Id}" onsubmit="return sumbit_sure()" >删除</a> </td>
+        		<td th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a th:href="${'/sizeAndCountAddCount/' + sizeAndCount.Id }">增加</a></td>
+	            <td th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a th:href="${'/sizeAndCountCutCount/' + sizeAndCount.Id }">减少</a></td>
+                <td th:if="${#httpServletRequest.isUserInRole('ROLE_ADMIN')}"><a th:href="${'/sizeAndCount/delete/' + sizeAndCount.Id}" onsubmit="return sumbit_sure()" >删除</a> </td>
 				
 	        </tr>
         </table>
